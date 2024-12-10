@@ -4,7 +4,7 @@ import plotly.express as px
 import numpy as np
 
 # Load the dataset
-data_path = 'C:\\Users\\mohgopal1\\Documents\\Sapien D\\mock_telecom_metrics_data.csv'
+data_path = 'mock_telecom_metrics_data.csv'
 df = pd.read_csv(data_path)
 
 # Ensure 'Date' is in datetime format
