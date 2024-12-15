@@ -34,8 +34,19 @@ st.title("Telecommunications Data Dashboard")
 logo_path = "Color logo - no background.png"
 logo_image = Image.open(logo_path)
 
-# Display the logo
-st.image(logo_image, width=200)  # You can adjust the width as needed
+
+# Convert the image to base64 to embed it in an img tag
+with open(logo_path, "rb") as image_file:
+    encoded_string = base64.b64encode(image_file.read()).decode('utf-8')
+
+# HTML code to position the image in the top right corner
+logo_html = f"""
+<div style="display: flex; justify-content: flex-end;">
+    <img src="data:image/png;base64,{encoded_string}" width="150">
+</div>
+"""
+
+st.markdown(logo_html, unsafe_allow_html=True)
 
 
 # Key metrics calculations
