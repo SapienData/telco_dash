@@ -4,14 +4,6 @@ import plotly.express as px
 import numpy as np
 from PIL import Image
 
-
-# Load your logo image
-logo_path = "Color logo - no background.png"
-logo_image = Image.open(logo_path)
-
-# Display the logo
-st.image(logo_image, width=200)  # You can adjust the width as needed
-
 # Load the dataset
 data_path = 'mock_telecom_metrics_data.csv'
 df = pd.read_csv(data_path)
@@ -36,6 +28,15 @@ st.set_page_config(layout="wide")
 
 # Set the title of the Streamlit app
 st.title("Telecommunications Data Dashboard")
+
+
+# Load your logo image
+logo_path = "Color logo - no background.png"
+logo_image = Image.open(logo_path)
+
+# Display the logo
+st.image(logo_image, width=200)  # You can adjust the width as needed
+
 
 # Key metrics calculations
 total_revenue = df['ARPU ($)'].sum()
