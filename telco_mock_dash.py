@@ -30,7 +30,7 @@ st.set_page_config(layout="wide")
 
 # Custom HTML for the title
 title_html = """
-    <div style="background-color:#f0f0f0;padding:10px;border-radius:5px;text-align:center">
+    <div style="background-color:#f0f0f0;padding:10px;border-radius:25px;text-align:center">
     <h1 style="color:#0073e6;font-family:Arial;">Telecommunications Data Dashboard</h1>
     </div>
 """
