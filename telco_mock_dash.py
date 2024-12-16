@@ -28,8 +28,13 @@ df[numeric_cols] = df[numeric_cols].apply(pd.to_numeric, errors='coerce')
 # Set the layout for wide display
 st.set_page_config(layout="wide")
 
-# Set the title of the Streamlit app
-st.title("Telecommunications Data Dashboard")
+# Custom HTML for the title
+title_html = """
+    <div style="background-color:#f0f0f0;padding:10px;border-radius:5px;text-align:center">
+    <h1 style="color:#0073e6;font-family:Arial;">Telecommunications Data Dashboard</h1>
+    </div>
+"""
+st.markdown(title_html, unsafe_allow_html=True)
 
 
 # Load your logo image
