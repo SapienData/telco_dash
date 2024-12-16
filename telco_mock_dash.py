@@ -128,30 +128,29 @@ with col6:
     st.plotly_chart(arpu_chart, use_container_width=True)
 
 with col7:
-    # Create an animated line chart for CLV over time
-    clv_chart = px.line(
+    # CLV over time with a stacked area chart
+    clv_chart = px.area(
         monthly_df,
         x='Month',
         y='CLV ($)',
         color='Category',
-        title='CLV Over Time - Animated',
-        markers=True,
-        animation_frame='Month',  # Animate by each time point
-        color_discrete_sequence=purple_colors
+        title='CLV Over Time',
+        color_discrete_sequence=purple_colors,
+        line_group='Category',  # Ensure smooth transitions between segments
+        markers=True  # Optionally add markers for data points
     )
     
-    # To ensure a smooth transition, specify the range of y-axis
-    clv_chart.update_yaxes(range=[0, monthly_df['CLV ($)'].max() + 100])
+    # Add average line for reference
+    clv_avg = monthly_df['CLV ($)'].mean()
+    clv_chart.add_hline(y=clv_avg, line_dash="dot", annotation_text="Average", annotation_position="bottom right")
 
-    # Customize layout for better visuals
+    # Customize the layout for better appearance
     clv_chart.update_layout(
         xaxis_title='Month',
         yaxis_title='CLV ($)',
-        transition_duration=500,  # Control animation speed
         showlegend=True
     )
 
-    # Display the animated chart
     st.plotly_chart(clv_chart, use_container_width=True)
     
 with col8:
