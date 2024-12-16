@@ -169,10 +169,38 @@ with col9:
     st.plotly_chart(nps_chart, use_container_width=True)
 
 with col10:
-    # Customer retention rate over time
-    retention_rate_chart = px.line(monthly_df, x='Month', y='CustomerRetentionRate (%)', color='Category', title='Customer Retention Rate Over Time', color_discrete_sequence=purple_colors)
+    # Prepare a stacked area chart for customer retention over time
+    retention_rate_chart = px.area(
+        monthly_df,
+        x='Month',
+        y='CustomerRetentionRate (%)',
+        color='Category',
+        title='Customer Retention Rate Over Time',
+        line_group='Category',
+        markers=False,
+        color_discrete_sequence=px.colors.sequential.Inferno
+    )
+    
+    # Adding an average line can still be done if needed
     retention_avg = monthly_df['CustomerRetentionRate (%)'].mean()
-    retention_rate_chart.add_hline(y=retention_avg, line_dash="dot", annotation_text="Average", annotation_position="bottom right")
+    retention_rate_chart.add_hline(
+        y=retention_avg,
+        line_dash="dot",
+        annotation_text="Average",
+        annotation_position="bottom right"
+    )
+
+    # Customize the layout for a more aesthetic appearance
+    retention_rate_chart.update_layout(
+        xaxis_title='Month',
+        yaxis_title='Retention Rate (%)',
+        showlegend=True,
+        margin=dict(l=20, r=20, t=30, b=20),
+        plot_bgcolor='rgba(0,0,0,0)',
+        hovermode='x'
+    )
+    
+    # Render the chart in Streamlit
     st.plotly_chart(retention_rate_chart, use_container_width=True)
 
 with col11:
