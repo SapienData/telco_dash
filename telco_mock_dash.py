@@ -3,6 +3,8 @@ import pandas as pd
 import plotly.express as px
 import numpy as np
 from PIL import Image
+import base64
+
 
 # Load the dataset
 data_path = 'mock_telecom_metrics_data.csv'
@@ -32,12 +34,20 @@ st.title("Telecommunications Data Dashboard")
 
 # Load your logo image
 logo_path = "Color logo - no background.png"
-logo_image = Image.open(logo_path)
 
+# Open the image and convert it to a base64 string
+with open(logo_path, "rb") as img_file:
+    encoded_string = base64.b64encode(img_file.read()).decode()
 
-# Display the logo
-st.image(logo_image, width=200)  # You can adjust the width as needed
+# HTML code to position the image at the top right
+logo_html = f"""
+    <div style="position: absolute; top: 0; right: 0; padding: 10px;">
+        <img src="data:image/png;base64,{encoded_string}" width="200">
+    </div>
+"""
 
+# Render the HTML
+st.markdown(logo_html, unsafe_allow_html=True)
 
 # Key metrics calculations
 total_revenue = df['ARPU ($)'].sum()
