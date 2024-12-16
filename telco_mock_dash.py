@@ -64,13 +64,38 @@ total_customers = df['CustomerID'].nunique()
 operational_costs = total_revenue * 0.1
 net_profit = total_revenue - total_cac - operational_costs
 
-# Display key metrics in columns
+# Create HTML for styled metric boxes
+def styled_metric_box(title, value, background_color="#f0f0f0"):
+    return f"""
+    <div style="
+        background-color: {background_color}; 
+        padding: 10px; 
+        border-radius: 10px; 
+        text-align: center;
+        margin: 1em 0;
+    ">
+        <h3 style="margin: 0; font-size: 1.2em;">{title}</h3>
+        <p style="margin: 0; font-size: 1.5em; font-weight: bold;">{value}</p>
+    </div>
+    """
+
+# Layout for displaying metrics in separate boxes
 col1, col2, col3, col4, col5 = st.columns(5)
-col1.metric("Total Revenue", f"${total_revenue:,.2f}")
-col2.metric("Total CLV", f"${total_clv:,.2f}")
-col3.metric("Total Customer Acquisition Cost", f"${total_cac:,.2f}")
-col4.metric("Net Profit", f"${net_profit:,.2f}")
-col5.metric("Total Customers", total_customers)
+
+with col1:
+    st.markdown(styled_metric_box("Total Revenue", f"${total_revenue:,.2f}"), unsafe_allow_html=True)
+
+with col2:
+    st.markdown(styled_metric_box("Total CLV", f"${total_clv:,.2f}"), unsafe_allow_html=True)
+
+with col3:
+    st.markdown(styled_metric_box("Total CAC", f"${total_cac:,.2f}"), unsafe_allow_html=True)
+
+with col4:
+    st.markdown(styled_metric_box("Net Profit", f"${net_profit:,.2f}"), unsafe_allow_html=True)
+
+with col5:
+    st.markdown(styled_metric_box("Total Customers", total_customers), unsafe_allow_html=True)
 
 # Filters
 categories = st.multiselect("Select Categories", options=df['Category'].unique(), default=df['Category'].unique())
