@@ -41,7 +41,7 @@ with open(logo_path, "rb") as img_file:
 
 # HTML code to position the image at the top right
 logo_html = f"""
-    <div style="position: fixed; top: 10px; right:10px;">
+    <div style="position: fixed; top: 5px; right:10px;">
         <img src="data:image/png;base64,{encoded_string}" width="150">
     </div>
 """
