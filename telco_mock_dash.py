@@ -79,20 +79,26 @@ def styled_metric_box(title, value, background_color="#f0f0f0"):
     </div>
     """
 
+# Format numbers to remove decimals (use commas for thousands separator)
+total_revenue_formatted = f"{int(total_revenue):,}"
+total_clv_formatted = f"{int(total_clv):,}"
+total_cac_formatted = f"{int(total_cac):,}"
+net_profit_formatted = f"{int(net_profit):,}"
+
 # Layout for displaying metrics in separate boxes
 col1, col2, col3, col4, col5 = st.columns(5)
 
 with col1:
-    st.markdown(styled_metric_box("Total Revenue", f"${total_revenue:,.2f}"), unsafe_allow_html=True)
+    st.markdown(styled_metric_box("Total Revenue", f"${total_revenue_formatted}"), unsafe_allow_html=True)
 
 with col2:
-    st.markdown(styled_metric_box("Total CLV", f"${total_clv:,.2f}"), unsafe_allow_html=True)
+    st.markdown(styled_metric_box("Total CLV", f"${total_clv_formatted}"), unsafe_allow_html=True)
 
 with col3:
-    st.markdown(styled_metric_box("Total CAC", f"${total_cac:,.2f}"), unsafe_allow_html=True)
+    st.markdown(styled_metric_box("Total CAC", f"${total_cac_formatted}"), unsafe_allow_html=True)
 
 with col4:
-    st.markdown(styled_metric_box("Net Profit", f"${net_profit:,.2f}"), unsafe_allow_html=True)
+    st.markdown(styled_metric_box("Net Profit", f"${net_profit_formatted}"), unsafe_allow_html=True)
 
 with col5:
     st.markdown(styled_metric_box("Total Customers", total_customers), unsafe_allow_html=True)
