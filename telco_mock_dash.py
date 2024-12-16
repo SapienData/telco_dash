@@ -128,31 +128,32 @@ with col6:
     st.plotly_chart(arpu_chart, use_container_width=True)
 
 with col7:
-    # CLV over time with a stacked area chart
-    clv_chart = px.area(
+    # Create an animated line chart for CLV over time
+    clv_chart = px.line(
         monthly_df,
         x='Month',
         y='CLV ($)',
         color='Category',
-        title='CLV Over Time',
-        color_discrete_sequence=purple_colors,
-        line_group='Category',  # Ensure smooth transitions between segments
-        markers=True  # Optionally add markers for data points
+        title='CLV Over Time - Animated',
+        markers=True,
+        animation_frame='Month',  # Animate by each time point
+        color_discrete_sequence=purple_colors
     )
     
-    # Add average line for reference
-    clv_avg = monthly_df['CLV ($)'].mean()
-    clv_chart.add_hline(y=clv_avg, line_dash="dot", annotation_text="Average", annotation_position="bottom right")
+    # To ensure a smooth transition, specify the range of y-axis
+    clv_chart.update_yaxes(range=[0, monthly_df['CLV ($)'].max() + 100])
 
-    # Customize the layout for better appearance
+    # Customize layout for better visuals
     clv_chart.update_layout(
         xaxis_title='Month',
         yaxis_title='CLV ($)',
+        transition_duration=500,  # Control animation speed
         showlegend=True
     )
 
+    # Display the animated chart
     st.plotly_chart(clv_chart, use_container_width=True)
-
+    
 with col8:
     # Churn Rate over time
     churn_chart = px.line(monthly_df, x='Month', y='ChurnRate (%)', color='Category', title='Churn Rate Over Time', color_discrete_sequence=purple_colors)
